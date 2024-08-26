@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class meeting extends Model
 {
     use HasFactory;
 
 
-    public function events(){
+    public function events() :BelongsTo{
         return $this->belongsTo(event::class);
     }
 }

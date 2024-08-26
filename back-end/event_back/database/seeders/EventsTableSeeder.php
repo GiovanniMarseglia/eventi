@@ -31,7 +31,6 @@ class EventsTableSeeder extends Seeder
                 'end' => $end,
                 'image' => NULL,
                 'color' => $faker->hexColor,
-                'meeting_id' => $i+1,
             ]);
         }
     }

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->date('end');
             $table->string('image')->nullable();
             $table->string('color');
-            $table->unsignedBigInteger('meeting_id');
-            $table->foreign('meeting_id')->references('id')->on('meetings');
             $table->timestamps();
         });
     }
