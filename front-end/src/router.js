@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AddMeeting from "./components/Body/AddMeeting.vue";
-import NewEvent from "./components/Body/NewEvent.vue";
-import WeekView from "./components/Body/WeekView.vue";
-import FindDateRoom from "./components/Body/FindDateRoom.vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import AddMeeting from "./pages/AddMeeting.vue";
+import NewEvent from "./pages/NewEvent.vue";
+import WeekView from "./pages/WeekView.vue";
+import FindDateRoom from "./pages/FindDateRoom.vue";
+import HomePage from "./pages/HomePage.vue";
 
 
 const router = createRouter({
@@ -12,7 +12,7 @@ const router = createRouter({
         { 
             path: '/', 
             name: 'home',
-            component: HelloWorld 
+            component: HomePage
         },
          { 
              path: '/AddMeeting', 
