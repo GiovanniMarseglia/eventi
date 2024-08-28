@@ -4,6 +4,7 @@ import NewEvent from "./pages/NewEvent.vue";
 import WeekView from "./pages/WeekView.vue";
 import FindDateRoom from "./pages/FindDateRoom.vue";
 import HomePage from "./pages/HomePage.vue";
+import Success from "./pages/Success.vue";
 
 
 const router = createRouter({
@@ -34,6 +35,11 @@ const router = createRouter({
              name: 'FindDateRoom', 
              component: FindDateRoom 
          },
+         { 
+            path: '/Success',
+            name: 'Success', 
+            component: Success 
+        },
         //  {
         //      path: '/:patchMatch(.*)*',
          
