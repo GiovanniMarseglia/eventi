@@ -15,14 +15,14 @@ today=today.toLocaleDateString();
 
 let events = ref([])
 
-function qualcosa(){
+function weekElements(){
   axios.get("http://127.0.0.1:8000/api/events/week").then(result=>{
   events.value = result.data.results
 })
 }
 
 onMounted(() => {
-  qualcosa();
+  weekElements();
 });
 </script>
 
