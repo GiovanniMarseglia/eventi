@@ -18,7 +18,11 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        //
+        $data = meeting::all();
+        return response()->json([
+            'success' => 'true',
+            'results' => $data,
+        ]);
     }
 
     /**

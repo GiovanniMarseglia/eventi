@@ -24,6 +24,9 @@
         <router-link :to="{name:'FindDateRoom'}">
             <span class="mx-1 hover:text-gray-300">Ricerca eventi per data e sala</span>
         </router-link>
+        <router-link :to="{name:'AllMeeting'}">
+            <span class="mx-1 hover:text-gray-300">Lista sala meeting</span>
+        </router-link>
         
         
     </div>

@@ -5,6 +5,7 @@ import WeekView from "./pages/WeekView.vue";
 import FindDateRoom from "./pages/FindDateRoom.vue";
 import HomePage from "./pages/HomePage.vue";
 import Success from "./pages/Success.vue";
+import AllMeeting from "./pages/AllMeeting.vue";
 
 
 const router = createRouter({
@@ -35,6 +36,11 @@ const router = createRouter({
              name: 'FindDateRoom', 
              component: FindDateRoom 
          },
+         { 
+            path: '/AllMeeting',
+            name: 'AllMeeting', 
+            component: AllMeeting, 
+        },
          { 
             path: '/Success',
             name: 'Success', 
