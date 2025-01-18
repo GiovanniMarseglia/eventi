@@ -36,7 +36,7 @@ class EventController extends Controller
 
 
 
-        $events=event::with('meetings')->where('end', '<=', Carbon::now()->addDays(8))->orderBy('start','asc')->get();
+        $events=event::with('meetings')->where('end', '>=', Carbon::now())->where('start', '<=', Carbon::now()->addDays(7))->orderBy('start','asc')->get();
 
         //no events return
         if ($events->isEmpty()) {
