@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class meeting extends Model
 {
@@ -13,9 +13,11 @@ class meeting extends Model
         "name",
         "place",
         "description",
+        "meeting_id",
     ];
 
-    public function events() :BelongsTo{
-        return $this->belongsTo(event::class);
+
+    public function events() :HasMany{
+        return $this->hasMany(event::class);
     }
 }

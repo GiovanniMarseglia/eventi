@@ -22,7 +22,6 @@ class MeetingsTableSeeder extends Seeder
                 'name' => $faker->name,
                 'description' => $faker->text,
                 'place' => $faker->numberBetween(0,150),
-                'event_id' => $i+1,
             ]);
         }
     }
