@@ -14,11 +14,12 @@
           <input type="text" name="name" id="">
           <label for="description">Inserisci la descrizione dell'evento</label>
           <textarea name="description" id="" cols="10" rows="5"></textarea>
-          <label for=""></label>
+          <label for="">Locandina</label>
           <input type="file" name="" id="">
-          <label for=""></label>
+          <label for="">Colore</label>
           <input type="color" name="" id="">
         </div>
+        <span>Data</span>
         <div class="flex">
           <input type="date" name="" id="">
           <input type="date" name="" id="">      
