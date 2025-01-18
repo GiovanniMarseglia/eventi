@@ -15,6 +15,7 @@ const checkMeeting = ref('')
 const arrayDataStart=ref([])
 const arrayDataEnd=ref([])
 const arrayDataNow=ref([])
+
 //get actual date for comparisone with field start in form
 const dateNow = new Date();
 
@@ -22,6 +23,7 @@ const giorno = dateNow.getDate();
 const mese = dateNow.getMonth() + 1; 
 const anno = dateNow.getFullYear();
 
+//adjust formatting to match with input date
 const dateFormatted = `${anno}-${mese <= 9 ? '0' : ''}${mese}-${giorno}`;
 arrayDataNow.value=dateFormatted.split("-")
 console.log(dateFormatted);
@@ -41,8 +43,17 @@ watch([name, description, color, start, end], () => {
     arrayDataEnd.value=end.value.split("-")
     
     if(!(arrayDataEnd.value[0] >= arrayDataStart.value[0])){
-
       end.value=""
+    }else{
+      if(!(arrayDataEnd.value[1] >= arrayDataStart.value[1])){
+        end.value=""
+      }else{
+        if ((arrayDataEnd.value[1] == arrayDataStart.value[1])) {
+          if(!(arrayDataEnd.value[2] >= arrayDataStart.value[2])){
+            end.value=""
+          }
+        }
+      }
     }
   }
 
