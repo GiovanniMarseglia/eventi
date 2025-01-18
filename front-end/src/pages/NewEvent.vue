@@ -65,9 +65,11 @@ watch([name, description, color, start, end], () => {
 })
 
 
-
+//get lists of all meeting available in the specific range
 function listMeeting(){
-  console.log(name.value,start.value)
+  axios.get("http://127.0.0.1:8000/api/events/availableMeetings", {params:{start:start.value,end:end.value}}).then(result=>{
+  console.dir(result.data.results)
+})
 }
 </script>
 

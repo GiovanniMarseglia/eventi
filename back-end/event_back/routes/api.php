@@ -28,5 +28,7 @@ Route::get('/events/week',[EventController::class,'week']);
 //Return only the event matched with meetings room id and event data
 //with axios use params called "id" and "date"
 Route::get('/events/find',[EventController::class,'find']);
+//Return only meetings available in the specific data range if free
+Route::get('/events/availableMeetings',[EventController::class,'availableMeetings']);
 
 Route::apiResource('/meetings',MeetingController::class);

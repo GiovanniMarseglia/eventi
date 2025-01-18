@@ -81,5 +81,25 @@ class EventController extends Controller
 
     }
 
+    //logic for check the available meetings in the specific range if free
+    public function availableMeetings(Request $request){
+        $start=$request->query('start');
+        $end=$request->query('end');
+        $meetings=meeting::whereHas('events',function($query) use ($start,$end){
+            $query->where(function($query) use ($start, $end) {
+                // First condition: start and end are less than the start
+                $query->where('start', '>', $end);
+            })->orWhere(function($query) use ($start, $end) {
+                // Second condition: start and end are greater than the end
+                $query->where('end', '<', $start);
+            });
+        })->get();
+
+        return response()->json([
+            'success' => true,
+            'results' => $meetings,
+        ]);
+    }
+
 
 }
