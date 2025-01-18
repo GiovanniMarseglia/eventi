@@ -1,5 +1,63 @@
 <script setup>
+import {ref,watch} from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
+const checkFields = ref('')
+const name= ref('')
+const description = ref('')
+const file = ref('')
+const color = ref('')
+const start = ref('')
+const end = ref('')
+const checkMeeting = ref('')
+
+const arrayDataStart=ref([])
+const arrayDataEnd=ref([])
+const arrayDataNow=ref([])
+//get actual date for comparisone with field start in form
+const dateNow = new Date();
+
+const giorno = dateNow.getDate();
+const mese = dateNow.getMonth() + 1; 
+const anno = dateNow.getFullYear();
+
+const dateFormatted = `${anno}-${mese <= 9 ? '0' : ''}${mese}-${giorno}`;
+arrayDataNow.value=dateFormatted.split("-")
+console.log(dateFormatted);
+
+watch([name, description, color, start, end], () => {
+  //check date,"start" must happen from today and not before
+  if(start.value){
+    arrayDataStart.value=start.value.split("-")
+  
+    if(!(arrayDataStart.value[0] >= arrayDataNow.value[0])){
+      start.value=""
+      end.value=""
+    }
+  }
+//check date,"start" must be before the "end"
+  if(end.value){
+    arrayDataEnd.value=end.value.split("-")
+    
+    if(!(arrayDataEnd.value[0] >= arrayDataStart.value[0])){
+
+      end.value=""
+    }
+  }
+
+  if (name.value && description.value && color.value && start.value && end.value) {
+    checkFields.value = true;
+  } else {
+    checkFields.value = false;
+  }
+})
+
+
+
+function listMeeting(){
+  console.log(name.value,start.value)
+}
 </script>
 
 <template>
@@ -11,18 +69,28 @@
       
         <div class="flex flex-col">
           <label for="name">Inserisci il nome dell'evento</label>
-          <input type="text" name="name" id="">
+          <input v-model="name" type="text" name="name" id="">
           <label for="description">Inserisci la descrizione dell'evento</label>
-          <textarea name="description" id="" cols="10" rows="5"></textarea>
-          <label for="">Locandina</label>
-          <input type="file" name="" id="">
-          <label for="">Colore</label>
-          <input type="color" name="" id="">
+          <textarea v-model="description" name="description" id="description" cols="10" rows="5"></textarea>
+          <label for="file">Locandina</label>
+          <input type="file" name="file" id="file">
+          <label for="color">Colore</label>
+          <input v-model="color" type="color" name="color" id="color">
         </div>
         <span>Data</span>
-        <div class="flex">
-          <input type="date" name="" id="">
-          <input type="date" name="" id="">      
+        <div class="flex gap-2">
+          <div class="flex flex-col">
+            <label for="start">Inizio</label>
+            <input type="date" v-model="start" name="start" id="start">
+          </div>
+          <div v-if="start" class="flex flex-col">
+            <label for="end">Fine</label>
+            <input type="date" v-model="end" name="end" id="end">      
+          </div>
+        </div>
+        <div class="flex justify-center gap-4">
+          <button v-if="checkFields" type="button" class="bg-blue-700 rounded-full px-4 py-1" @click="listMeeting">Cerca</button>
+          <button v-if="checkMeeting" type="button" class="bg-lime-500 rounded-full px-4 py-1">Crea</button>
         </div>
       </div>
     </form>

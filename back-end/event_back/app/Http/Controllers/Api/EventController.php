@@ -53,6 +53,7 @@ class EventController extends Controller
         ]);
     }
 
+    //code below need review because column changed (meetindTable -1 column (event_id)) (eventTable +1 column (meeting_is))
     public function find(Request $request){
         $findId=$request->query('id');
         $findDate=$request->query('date');
