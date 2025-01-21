@@ -11,7 +11,7 @@ const loading=ref(false);
 function send(){
   if(name.value && description.value && number.value){
     loading.value=true
-    axios.post("http://127.0.0.1:8000/api/meetings", { params: { name: this.name, description: this.description, number:this.number } }).then(function (response){
+    axios.post("http://127.0.0.1:8000/api/meetings",{ name: name.value, description: description.value, place:number.value } ).then(function (response){
       console.log("risposta back " ,response)
       name.value='';
       description.value='';

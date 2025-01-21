@@ -34,9 +34,7 @@ class MeetingController extends Controller
             $data='a';
             $data = $request->validated();
             $newMeeting = new meeting();
-            $newMeeting->name = $data["params"]["name"];
-            $newMeeting->description = $data["params"]["description"];
-            $newMeeting->place = $data["params"]["number"];
+            $newMeeting->fill($data);
             $newMeeting->save();
             return response()->json([
                 'success' => true,
