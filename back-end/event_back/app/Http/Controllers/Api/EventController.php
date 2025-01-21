@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use DB;
 use Illuminate\Http\Request;
-use App\Models\event;
-use App\Models\meeting;
+use App\Models\Event;
+use App\Models\Meeting;
 use Carbon\Carbon;
 use App\Http\Requests\StoreEventRequest;
 
@@ -14,9 +13,7 @@ class EventController extends Controller
 {
     public function index(){
 
-
-
-        $events=event::with('meetings')->get();
+        $events=Event::with('meetings')->get();
 
         //no events return
         if ($events->isEmpty()) {
@@ -36,9 +33,7 @@ class EventController extends Controller
 
     public function week(){
 
-
-
-        $events=event::with('meetings')->where('end', '>=', Carbon::now())->where('start', '<=', Carbon::now()->addDays(7))->orderBy('start','asc')->get();
+        $events=Event::with('meetings')->where('end', '>=', Carbon::now())->where('start', '<=', Carbon::now()->addDays(7))->orderBy('start','asc')->get();
 
         //no events return
         if ($events->isEmpty()) {
@@ -60,7 +55,7 @@ class EventController extends Controller
         $findId=$request->query('id');
         $findDate=$request->query('date');
 
-        $events=event::whereHas('meetings',function($query) use ($findId,$findDate){
+        $events=Event::whereHas('meetings',function($query) use ($findId,$findDate){
             $query->where('id', '=', $findId);
         })->where('start', '<=', $findDate)->where('end', '>=', $findDate)->with('meetings')->get();
 
@@ -87,7 +82,7 @@ class EventController extends Controller
     public function availableMeetings(Request $request){
         $start=$request->query('start');
         $end=$request->query('end');
-        $meetings=meeting::whereHas('events',function($query) use ($start,$end){
+        $meetings=Meeting::whereHas('events',function($query) use ($start,$end){
             $query->where(function($query) use ($start, $end) {
                 // First condition: start and end are less than the start
                 $query->where('start', '>', $end);

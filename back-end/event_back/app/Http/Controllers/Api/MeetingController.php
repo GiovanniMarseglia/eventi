@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\meeting;
+use App\Models\Meeting;
 use App\Http\Requests\StoreMeetingRequest;
 //manage exception
 use Illuminate\Validation\ValidationException;
@@ -18,7 +18,7 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        $data = meeting::all();
+        $data = Meeting::all();
         return response()->json([
             'success' => 'true',
             'results' => $data,
@@ -33,7 +33,7 @@ class MeetingController extends Controller
         try{
             $data='a';
             $data = $request->validated();
-            $newMeeting = new meeting();
+            $newMeeting = new Meeting();
             $newMeeting->fill($data);
             $newMeeting->save();
             return response()->json([

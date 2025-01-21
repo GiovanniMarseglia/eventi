@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class meeting extends Model
+class Meeting extends Model
 {
     use HasFactory;
+
     protected $fillable=[
         "name",
         "place",
@@ -18,6 +19,6 @@ class meeting extends Model
 
 
     public function events() :HasMany{
-        return $this->hasMany(event::class);
+        return $this->hasMany(Event::class);
     }
 }
