@@ -28,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto ">
     
     <h1 class="text-2xl font-semibold text-center pt-4">Ecco una lista degli eventi che vanno da giorno {{ today }} fino al giorno {{ todayPlusSeven }}</h1>
     <div v-if="loading" class="container mx-auto mt-5 flex justify-center">
@@ -36,25 +36,34 @@ onMounted(() => {
       <font-awesome-icon :icon="['fas', 'spinner']"class="fa-spin loader" />
 
     </div>
-    <div v-if="events" class="flex flex-row mt-6 gap-2">
-      <div class="border border-black weq p-3 text-center" v-for="element in events" :key="element.id">
-        <singleEvent :events="element"/>
+      <div v-if="events" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="text-center h-full" v-for="element in events" :key="element.id">
+          <div class="border border-black h">
+            <singleEvent :events="element"/>
+            <div class="flex flex-col">
+              <span class="font-semibold">Nome Sala: </span>
+              <span>{{ element.meetings.name }}</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     <div v-else>
       <h1>Nei prossimi 7 giorni non risultano eventi in corso</h1>
     </div>
-</div>
+    
+  </div>
   
 </template>
 
 <style scoped>
-.weq{
-  width: calc(100% / 3);
-}
+
+
 
 .loader{
   min-width: 500px;
   height: 200px;
+}
+.h{
+  min-height: 100%;
 }
 </style>
