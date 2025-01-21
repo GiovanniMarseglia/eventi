@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\event;
 use App\Models\meeting;
 use Carbon\Carbon;
+use App\Http\Requests\StoreEventRequest;
 
 class EventController extends Controller
 {
@@ -104,15 +105,8 @@ class EventController extends Controller
 
     //save new event
 
-    public function storeEvents(Request $request) {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
-            'color' => 'required|string|max:7', // Assuming a hex color code
-            'start' => 'required|date',
-            'end' => 'required|date|after:start', // Ensure end is after start
-            'meeting_id' => 'required|integer'
-        ]);
+    public function storeEvents(StoreEventRequest $request) {
+        $validatedData = $request->validated();
 
         $event = new Event();
         $event->fill($validatedData);

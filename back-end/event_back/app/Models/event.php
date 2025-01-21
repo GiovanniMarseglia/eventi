@@ -15,4 +15,5 @@ class event extends Model
     }
 
     protected $fillable =['title','description','color','start','end','meeting_id'];
+
 }
