@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\event;
 use App\Models\meeting;
@@ -100,6 +101,26 @@ class EventController extends Controller
             'results' => $meetings,
         ]);
     }
+
+    //save new event
+
+    public function storeEvents(Request $request) {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'color' => 'required|string|max:7', // Assuming a hex color code
+            'start' => 'required|date',
+            'end' => 'required|date|after:start', // Ensure end is after start
+            'meeting_id' => 'required|integer'
+        ]);
+
+        $event = new Event();
+        $event->fill($validatedData);
+        $event->save();
+
+        return response()->json(['message' => 'Event created successfully!', 'event' => $event], 201);
+    }
+
 
 
 }

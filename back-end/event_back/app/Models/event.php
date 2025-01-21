@@ -13,4 +13,6 @@ class event extends Model
     public function meetings() :BelongsTo{
         return $this->belongsTo(meeting::class);
     }
+
+    protected $fillable =['title','description','color','start','end','meeting_id'];
 }

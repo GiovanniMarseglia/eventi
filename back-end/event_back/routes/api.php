@@ -31,4 +31,7 @@ Route::get('/events/find',[EventController::class,'find']);
 //Return only meetings available in the specific data range if free
 Route::get('/events/availableMeetings',[EventController::class,'availableMeetings']);
 
+Route::post('/events/storeEvents', [EventController::class, 'storeEvents']);
+
+
 Route::apiResource('/meetings',MeetingController::class);
