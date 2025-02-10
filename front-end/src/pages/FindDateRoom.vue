@@ -1,5 +1,6 @@
 <script setup>
 import singleMeeting from '../components/singleMeeting.vue'
+import singleEvent from '../components/singleEvent.vue' 
 import axios from 'axios'
 import{ref,onMounted} from 'vue'
 
@@ -57,6 +58,17 @@ function find(){
         </div>
     </form>
 
+      <!-- Component for listed events -->
+      
+      <div>
+        <div v-for="element in meetingEvents">
+          <div v-for="elements in element.events" class="bord p-2">
+            <singleEvent :events="elements"></singleEvent>
+          </div>
+        </div>
+      
+      </div>
+
 
 
 
@@ -113,7 +125,7 @@ function find(){
 </template>
 
 <style scoped>
-input, textarea, form{
+input, textarea, form, .bord{
     margin-bottom: 5px;
     border: 1px solid gray;
   }
