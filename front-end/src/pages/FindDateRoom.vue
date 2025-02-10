@@ -8,11 +8,11 @@ showModal.value=false
 const idMeeting=ref()
 const lock = ref(Boolean)
 lock.value=false
-
 const start = ref('')
 
-
 const arrayMeeting=ref([])
+const meetingEvents=ref([])
+
 
 function meetingList(){
   axios.get("http://127.0.0.1:8000/api/meetings").then(result=>{
@@ -22,11 +22,13 @@ function meetingList(){
 
 
 function find(){
+
   //insert URL to find all events for one meetings in "date" range
 
-//   axios.get("http://127.0.0.1:8000/api/meetings").then(result=>{
-//     arrayMeeting.value = result.data.results
-// })
+   axios.get("http://127.0.0.1:8000/api/events/find",{params:{id:idMeeting.value,date:start.value}}).then(result=>{
+    meetingEvents.value = result.data.results
+    console.log(meetingEvents.value)
+ })
 }
 
 

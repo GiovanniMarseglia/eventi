@@ -55,16 +55,16 @@ class EventController extends Controller
         $findId=$request->query('id');
         $findDate=$request->query('date');
 
-        $events=Event::whereHas('meetings',function($query) use ($findId,$findDate){
-            $query->where('id', '=', $findId);
-        })->where('start', '<=', $findDate)->where('end', '>=', $findDate)->with('meetings')->get();
+        $events=Meeting::whereHas('events',function($query) use ($findDate){
+            $query->where('start', '<=', $findDate)->where('end','>=',$findDate);
+        })->where("id","=",$findId)->with("events")->get();
 
 
         //no events return
         if ($events->isEmpty()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Nessun evento trovato per i criteri specificati.'
+                'results' => 'Nessun evento trovato per i criteri specificati.'
             ]);
         }
 
